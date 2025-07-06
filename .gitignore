@@ -1,0 +1,25 @@
+# Ignore build artifacts
+/build/
+/*.o
+*.out
+*.exe
+*.a
+*.so
+*.dll
+
+# Ignore core dumps
+core
+
+# Ignore dependency and log files
+*.log
+
+# Ignore editor/IDE temp files
+*~
+*.swp
+*.swo
+.DS_Store
+.vscode/
+.idea/
+
+# Ignore compiled target binary
+calendar
