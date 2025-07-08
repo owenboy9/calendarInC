@@ -4,5 +4,6 @@
 #include "event.h"
 
 void saveEventToFile(Event *e, const char *filename);
+void writeAllEventsToFile(Event *events, int count, const char *filename);
 
 #endif
