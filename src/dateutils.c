@@ -7,7 +7,7 @@
 void weekday(int year, int month, int day, int measure, int interval, int count) {
     struct tm t = {0};
     t.tm_year = year - 1900; // tm_year is years since 1900
-    t.tm_mon = month - 1;    // tm_mon is 0-indexed (0 = January)
+    t.tm_mon = month - 1;    // tm_mon is 0-indexed (0 = january)
     t.tm_mday = day;
 
     char buf[100];

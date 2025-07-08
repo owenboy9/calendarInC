@@ -2,6 +2,7 @@
 #include "../include/add.h"
 #include "../include/event.h"
 #include "../include/dateutils.h"
+#include "../include/saveToFile.h"
 
 int main() {
     Event newEvent;
@@ -26,6 +27,20 @@ int main() {
         weekday(newEvent.year, newEvent.month, newEvent.day,
                newEvent.recurrenceType, newEvent.recurrenceInterval, newEvent.recurrenceCount);
     }
+
+    saveEventToFile(&newEvent, "calendar.txt");
+
+    /*
+    printf("would you like to add another thing to your calendar? (1 = yes, 0 = no)\n");
+
+    int more;
+    scanf("%d", &more);
+
+    if (more == 1) {
+        printf("***** add new event *****\n");
+        add(&newEvent);
+    }
+    */
 
     return 0;
 }
