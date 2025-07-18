@@ -1,5 +1,5 @@
 #include "../include/event.h"
-#include "../include/add.h"
+#include "../include/inpututils.h"
 #include <stdio.h>
 
 void editEvent(Event *events, int count, int indexToEdit) {
@@ -11,23 +11,30 @@ void editEvent(Event *events, int count, int indexToEdit) {
 
     Event *e = &events[indexToEdit];
 
-    printf("edit event: %s\n", e->name);
-    printf("leave blank to keep the current value");
+    printf("edit event: %s\n(leave blank to keep the current value)\n", e->name);
 
-    char input[100];
+    promptString("new name", e->name, NAME_SIZE);
+    promptString("new category", e->category, CATEGORY_SIZE);
+    promptInt("new year", &e->year);
+    promptInt("new month (1-12)", &e->month);
+    promptInt("new day (1-31)", &e->day);
+    promptInt("is this a timed event? (0 = all day, 1 = timed)", &e->hasTime);
 
-    printf("new name (currently '%s'): ", e->name);
-    fgets(input, sizeof(input), stdin);
-    if (input[0] != '\n') strncpy(e->name, input, sizeof(e->name));
+    if (e->hasTime) {
+        promptInt("start hour (0-23)", &e->startHour);
+        promptInt("start minute (0-59)", &e->startMinute);
+        promptInt("does it have end time? (0 = no, 1 = yes)", & e->hasEndTime);
 
-    char input[50];
+        if (e->hasEndTime) {
+            promptInt("end hour (0-23)", &e->endHour);
+            promptInt("end minute (0-59)", &e->endMinute);
+        }
+    }
 
-    printf("new category (currently '%s'): ", e->category);
-    fgets(input, sizeof(input), stdin);
-    if (input[0] != '\n') strncpy(e->category, input, sizeof(e->category));
-
-    printf("new year (currently: '%d'): ", e->year);
-    scanf("%d", &e->year);
-
-    add(&events[indexToEdit]);
+    promptInt("is this a recurring event? (0 = no, 1 = yes)", &e->isRecurring);
+    if (e->isRecurring) {
+        promptInt("recurrence type (0 = days, 1 = weeks, 2 = months, 3 = years)", &e->recurrenceType);
+        promptInt("every... days / weeks, etc?", &e->recurrenceInterval);
+        promptInt("how many times?", &e->recurrenceCount);
+    }
 }
