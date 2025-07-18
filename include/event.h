@@ -1,9 +1,12 @@
 #ifndef EVENT_H
 #define EVENT_H
 
+#define NAME_SIZE 100
+#define CATEGORY_SIZE 100
+
 typedef struct {
-    char name[100];
-    char category[50];
+    char name[NAME_SIZE];
+    char category[CATEGORY_SIZE];
     int year, month, day;
     int startHour, startMinute;
     int endHour, endMinute;
