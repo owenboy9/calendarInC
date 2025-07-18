@@ -1,6 +1,7 @@
 #include "../include/event.h"
 #include <string.h>
 #include <ctype.h>
+#include <stdio.h>
 
 // search by name or category
 

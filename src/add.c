@@ -11,6 +11,7 @@ void trimNewLine(char *str) {
 
 void add(Event *e) {
     char buffer [100];
+    char smallBuffer [50];
 
     printf("enter event name: ");
     fgets(buffer, sizeof(buffer), stdin);
@@ -18,9 +19,9 @@ void add(Event *e) {
     strncpy(e->name, buffer, sizeof(e->name) - 1);
 
     printf("enter event category: ");
-    fgets(buffer, sizeof(buffer), stdin);
-    trimNewLine(buffer);
-    strncpy(e->category, buffer, sizeof(buffer) -1);
+    fgets(smallBuffer, sizeof(smallBuffer), stdin);
+    trimNewLine(smallBuffer);
+    strncpy(e->category, smallBuffer, sizeof(smallBuffer) -1);
 
     printf("enter year: ");
     scanf("%d", &e->year);

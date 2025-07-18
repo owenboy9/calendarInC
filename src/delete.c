@@ -1,4 +1,5 @@
 #include "../include/edit.h"
+#include <stdio.h>
 
 int deleteEvent(Event *events, int *count, int indexToDelete) {
     if (indexToDelete < 0 || indexToDelete >= *count) {

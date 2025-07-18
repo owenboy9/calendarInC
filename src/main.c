@@ -30,17 +30,5 @@ int main() {
 
     saveEventToFile(&newEvent, "calendar.txt");
 
-    /*
-    printf("would you like to add another thing to your calendar? (1 = yes, 0 = no)\n");
-
-    int more;
-    scanf("%d", &more);
-
-    if (more == 1) {
-        printf("***** add new event *****\n");
-        add(&newEvent);
-    }
-    */
-
     return 0;
 }
