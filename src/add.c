@@ -3,83 +3,35 @@
 #include <string.h>
 #include "../include/event.h"
 
-void trimNewLine(char *str) {
-    // remove newline from fgets
-    size_t len = strlen(str);
-    if (len > 0 && str[len-1] == '\n') str[len-1] = '\0';
-}
-
 void add(Event *e) {
-    char nameBuffer [NAME_SIZE];
-    char categoryBuffer [CATEGORY_SIZE];
 
-    printf("enter event name: ");
-    fgets(nameBuffer, sizeof(nameBuffer), stdin);
-    trimNewLine(nameBuffer);
-    strncpy(e->name, nameBuffer, sizeof(e->name) - 1);
-    e->name[sizeof(e->name) -1] = '\0';
+    printf("add a new event");
 
-    printf("enter event category: ");
-    fgets(categoryBuffer, sizeof(categoryBuffer), stdin);
-    trimNewLine(categoryBuffer);
-    strncpy(e->category, categoryBuffer, sizeof(categoryBuffer) -1);
-    e->category[sizeof(e->category) -1] = '\0';
+    *e = createDefaultEvent();    
 
-    printf("enter year: ");
-    scanf("%d", &e->year);
+    promptString("name", e->name, NAME_SIZE, 0);
+    promptString("category", e->category, CATEGORY_SIZE, 0);
+    promptInt("year", &e->year, 0);
+    promptInt("month (1-12)", &e->month, 0);
+    promptInt("day (1-31)", &e->day, 0);
+    promptInt("is this a timed event? (0 = all day, 1 = timed)", &e->hasTime, 0);
 
-    printf("enter month (1-12): ");
-    scanf("%d", &e->month);
-
-    printf("enter day (1-31): ");
-    scanf("%d", &e->day);
-
-    printf("is this a timed event? (0 = all day, 1 = yes): ");
-    scanf("%d", &e->hasTime);
-
-    if(e->hasTime) {
-        printf("start hour (0-23): ");
-        scanf("%d", &e->startHour);
-        printf("start minute (0-59): ");
-        scanf("%d", &e->startMinute);
-
-        printf("does it have an end time? (0 = no, 1 = yes): ");
-        scanf("%d", &e->hasEndTime);
+    if (e->hasTime) {
+        promptInt("start hour (0-23)", &e->startHour, 0);
+        promptInt("start minute (0-59)", &e->startMinute, 0);
+        promptInt("does it have end time? (0 = no, 1 = yes)", & e->hasEndTime, 0);
 
         if (e->hasEndTime) {
-            printf("end hour (0-23): ");
-            scanf("%d", &e->endHour);
-            printf("end minute (0-59): ");
-            scanf("%d", &e->endMinute);
-        } else {
-            // default one hour later
-            e->endHour = (e->startHour + 1) % 24;
-            e->endMinute = e->startMinute;
+            promptInt("end hour (0-23)", &e->endHour, 0);
+            promptInt("end minute (0-59)", &e->endMinute, 0);
         }
-    } else {
-        // no time for all day events
-        e->startHour = e->startMinute = 0;
-        e->endHour = e->endMinute = 0;
-        e->hasEndTime = 0;
-    }
-    printf("is this a recurring event? (0 = no, 1 = yes): ");
-    scanf("%d", &e->isRecurring);
-
-    if(e->isRecurring) {
-        printf("recurrence type (0 = days, 1 = weeks, 2 = months, 3 = years): ");
-        scanf("%d", &e->recurrenceType);
-
-        printf("how many times do you want to repeat it? ");
-        scanf("%d", &e->recurrenceCount);
-
-        printf("interval between occurences (e.g., every 2 weeks): ");
-        scanf("%d", &e->recurrenceInterval);
-    } else {
-        e->recurrenceType = 0; // default to days
-        e->recurrenceCount = 0; // no recurrence
-        e->recurrenceInterval = 0; // no interval
     }
 
-    // clear stdin buffer (in case it's needed for next fgets)
-    while (getchar() != '\n');
+    promptInt("is this a recurring event? (0 = no, 1 = yes)", &e->isRecurring, 0);
+    if (e->isRecurring) {
+        promptInt("recurrence type (0 = days, 1 = weeks, 2 = months, 3 = years)", &e->recurrenceType, 0);
+        promptInt("every... days / weeks, etc?", &e->recurrenceInterval, 0);
+        promptInt("how many times?", &e->recurrenceCount, 0);
+    }
+    
 }
