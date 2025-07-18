@@ -4,6 +4,9 @@
 #define NAME_SIZE 100
 #define CATEGORY_SIZE 100
 
+extern Event DEFAULT_EVENT;
+Event createDefaultEvent();
+
 typedef struct {
     char name[NAME_SIZE];
     char category[CATEGORY_SIZE];

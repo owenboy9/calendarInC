@@ -3,8 +3,8 @@
 
 #include <stddef.h>
 
-void promptString(const char *label, char *field, size_t maxLen);
+void promptString(const char *label, char *field, size_t maxLen, int showCurrent);
 
-void promptInt(const char *label, int *field);
+void promptInt(const char *label, int *field, int showCurrent);
 
 #endif
