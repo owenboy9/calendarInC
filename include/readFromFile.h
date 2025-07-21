@@ -3,6 +3,6 @@
 
 #include "event.h"
 
-int readEventsFromFile(Event *events, int max, const char *filename);
+int readEventsFromFile(EventManager *mgr, const char *filename);
 
 #endif

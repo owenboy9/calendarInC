@@ -1,9 +1,9 @@
 #ifndef SAVE_TO_FILE_H
-#define SAVE_TO_FILE
+#define SAVE_TO_FILE_H
 
 #include "event.h"
+#include "eventManager.h"
 
-void saveEventToFile(Event *e, const char *filename);
-void writeAllEventsToFile(Event *events, int count, const char *filename);
+void writeAllEventsToFile(const EventManager *mgr, const char *filename);
 
 #endif

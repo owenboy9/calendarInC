@@ -3,6 +3,6 @@
 
 #include "event.h"
 
-void editEvent(Event *events, int count, int indexToEdit);
+void editEvent(EventManager *mgr, int index);
 
 #endif
