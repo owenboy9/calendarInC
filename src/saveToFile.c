@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 #include "../include/event.h"
+#include "../include/sort.h"
 
 // make sure all is lower case
 void toLowerStr(char *dest, const char *src, size_t maxLen) {
@@ -43,6 +45,10 @@ void writeAllEventsToFile(Event *events, int count, const char *filename) {
         perror("couldn't write events to file");
         return;
     }
+
+    // sort events before writing
+
+    qsort(events, count, sizeof(Event), compareEventsByDate);
 
     for (int i = 0; i < count; i++) {
         char nameLower[100];
