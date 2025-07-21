@@ -2,24 +2,48 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/event.h"
+#include "../include/eventManager.h"
 
-int readEventsFromFile(Event *events, int max, const char *filename) {
+int readEventsFromFile(EventManager *mgr, const char *filename) {
     FILE *f = fopen(filename, "r");
-    if (!f) return 0;
+    if (!f) {
+        // file doesn't exist — create it
+        f = fopen(filename, "w");
+        if (!f) {
+            perror("Failed to create events file");
+            return 0;
+        }
+        fclose(f);
+        // now open again for reading (will be empty)
+        f = fopen(filename, "r");
+        if (!f) {
+            perror("Failed to reopen events file");
+            return 0;
+        }
+    }
 
+    initEventManager(mgr);
+
+    Event temp;
     int count = 0;
 
-    while (count < max && fscanf(f, " %99[^|]|%99[^|]|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
-           events[count].name, events[count].category,
-           &events[count].year, &events[count].month, &events[count].day,
-           &events[count].startHour, &events[count].startMinute,
-           &events[count].endHour, &events[count].endMinute,
-           &events[count].hasTime, &events[count].hasEndTime,
-           &events[count].isRecurring, &events[count].recurrenceCount, &events[count].recurrenceInterval, &events[count].recurrenceType) == 16)
-           {
-            count++;
-           }
+    while (fscanf(f, " %99[^|]|%99[^|]|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
+        temp.name, temp.category,
+        &temp.year, &temp.month, &temp.day,
+        &temp.startHour, &temp.startMinute,
+        &temp.endHour, &temp.endMinute,
+        &temp.hasTime, &temp.hasEndTime,
+        &temp.isRecurring, &temp.recurrenceCount, &temp.recurrenceInterval, &temp.recurrenceType) == 15) {
+            if (!ensureCapacity(mgr, count + 1)) {
+                fclose(f);
+                return count;
+            }
 
-           fclose(f);
-           return count;
+        mgr->events[count++] = temp;
+    }
+
+    fclose(f);
+
+    mgr->count = count;
+    return count;
 }

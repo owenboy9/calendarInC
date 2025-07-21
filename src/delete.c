@@ -1,17 +1,13 @@
 #include "../include/edit.h"
 #include <stdio.h>
+#include "../include/eventManager.h"
 
-int deleteEvent(Event *events, int *count, int indexToDelete) {
-    if (indexToDelete < 0 || indexToDelete >= *count) {
-        printf("invalid index\n");
-        return 0;
-    }
+int deleteEvent(EventManager *mgr, int index) {
+    if (index < 0 || index >= mgr->count) return 0; // invalid index
 
-    // shift events down to overwrite the one being deleted
-    for (int i = indexToDelete; i < *count -1; i++) {
-        events[i] = events[i+1];
-    }
+    for (int i = index; i < mgr->count -1; i++) mgr->events[i] = mgr->events[i+1]; // shift events left
 
-    (*count)--;  // reduce event count
+    mgr->count--;
+
     return 1;
 }

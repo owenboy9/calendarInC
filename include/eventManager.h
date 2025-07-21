@@ -15,19 +15,7 @@ void initEventManager(EventManager *mgr);
 // free allocated memory in event manager
 void freeEventManager(EventManager *mgr);
 
-// load events from file, update count and capacity
-int loadEvents(EventManager *mgr, const char *filename);
-
-// save events to file
-int saveEvents(EventManager *mgr, const char *filename);
-
 // add a new event (dynamic resizing)
 int addEvent(EventManager *mgr, Event newEvent);
-
-// delete event by index
-int deleteEvent(EventManager *mgr, int index);
-
-// edit event at index
-void editEvent(EventManager *mgr, int index);
 
 #endif // EVENTMANAGER_H
