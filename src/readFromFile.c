@@ -9,7 +9,7 @@ int readEventsFromFile(Event *events, int max, const char *filename) {
 
     int count = 0;
 
-    while (count < max && fscanf(f, " %99[^|]|%49[^|]|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
+    while (count < max && fscanf(f, " %99[^|]|%99[^|]|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
            events[count].name, events[count].category,
            &events[count].year, &events[count].month, &events[count].day,
            &events[count].startHour, &events[count].startMinute,

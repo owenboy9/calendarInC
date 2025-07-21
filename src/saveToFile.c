@@ -22,7 +22,7 @@ void saveEventToFile(Event *e, const char *filename) {
     }
 
     char nameLower[100];
-    char categoryLower[50];
+    char categoryLower[100];
     toLowerStr(nameLower, e->name, sizeof(nameLower));
     toLowerStr(categoryLower, e->category, sizeof(categoryLower));
 
@@ -46,7 +46,7 @@ void writeAllEventsToFile(Event *events, int count, const char *filename) {
 
     for (int i = 0; i < count; i++) {
         char nameLower[100];
-        char categoryLower[50];
+        char categoryLower[100];
         toLowerStr(nameLower, events[i].name, sizeof(nameLower));
         toLowerStr(categoryLower, events[i].category, sizeof(categoryLower));
 
