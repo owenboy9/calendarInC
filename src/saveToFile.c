@@ -14,33 +14,6 @@ void toLowerStr(char *dest, const char *src, size_t maxLen) {
     dest[maxLen - 1] = '\0';  // ensure null-termination
 }
 
-/*
-// adding a single event
-void saveEventToFile(Event *e, const char *filename) {
-    FILE *f = fopen(filename, "a");  // append to it
-
-    if (!f) {
-        perror("could not open file to save the event to");
-        return;
-    }
-
-    char nameLower[100];
-    char categoryLower[100];
-    toLowerStr(nameLower, e->name, sizeof(nameLower));
-    toLowerStr(categoryLower, e->category, sizeof(categoryLower));
-
-    fprintf(f, "%s|%s|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
-            nameLower, categoryLower,
-            e->year, e->month, e->day,
-            e->startHour, e->startMinute,
-            e->endHour, e->endMinute,
-            e->hasTime, e->hasEndTime,
-            e->isRecurring, e->recurrenceCount, e->recurrenceInterval, e->recurrenceType);
-    fclose(f);
-}
-
-*/
-
 // rewriting the whole file after editing or deleting something
 void writeAllEventsToFile(const EventManager *mgr, const char *filename) {
     FILE *f = fopen(filename, "w");  // overwrite the whole thing
