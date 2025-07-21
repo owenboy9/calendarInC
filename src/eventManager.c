@@ -45,4 +45,6 @@ int addEvent(EventManager *mgr, Event newEvent) {
     }
 
     mgr->events[mgr->count++] = newEvent;
+
+    return 1;
 }

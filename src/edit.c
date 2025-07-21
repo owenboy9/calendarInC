@@ -1,15 +1,16 @@
 #include "../include/event.h"
 #include "../include/inpututils.h"
+#include "../include/eventManager.h"
 #include <stdio.h>
 
-void editEvent(Event *events, int count, int indexToEdit) {
+void editEvent(EventManager *mgr, int index) {
 
-    if (indexToEdit < 0 || indexToEdit >= count) {
+    if (index < 0 || index >= mgr->count) {
         printf("invalid index\n");
         return;
     }
 
-    Event *e = &events[indexToEdit];
+    Event *e = &mgr->events[index];
 
     printf("edit event: %s\n(leave blank to keep the current value)\n", e->name);
 

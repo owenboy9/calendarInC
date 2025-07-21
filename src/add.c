@@ -4,7 +4,7 @@
 #include "../include/event.h"
 #include "../include/eventManager.h"
 
-void add(Event *e) {
+void createEventFromUserInput(Event *e) {
 
     printf("add a new event");
 

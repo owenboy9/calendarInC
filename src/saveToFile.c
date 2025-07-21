@@ -14,7 +14,7 @@ void toLowerStr(char *dest, const char *src, size_t maxLen) {
     dest[maxLen - 1] = '\0';  // ensure null-termination
 }
 
-
+/*
 // adding a single event
 void saveEventToFile(Event *e, const char *filename) {
     FILE *f = fopen(filename, "a");  // append to it
@@ -38,6 +38,8 @@ void saveEventToFile(Event *e, const char *filename) {
             e->isRecurring, e->recurrenceCount, e->recurrenceInterval, e->recurrenceType);
     fclose(f);
 }
+
+*/
 
 // rewriting the whole file after editing or deleting something
 void writeAllEventsToFile(const EventManager *mgr, const char *filename) {
