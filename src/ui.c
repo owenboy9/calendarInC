@@ -4,6 +4,10 @@
 #include "../include/eventManager.h"
 #include "../include/search.h"
 #include "../include/menu.h"
+#include "../include/edit.h"
+#include "../include/add.h"
+#include "../include/edit.h"
+#include "../include/event.h"
 #include <stdlib.h>
 
 const int MAX_EVENTS = 1000; // Maximum number of events to read
@@ -22,8 +26,8 @@ void listEvents(EventManager *mgr) {
     }
 }
 
-void handleViewCalendar(EventManager *mgr, const char *filename) {
-    readEventsFromFile(mgr, filename);
+// make sure to have readEventsFromFile() called in main() before this
+void handleViewCalendar(EventManager *mgr) {
     qsort(mgr->events, mgr->count, sizeof(Event), compareEventsByDate);
     listEvents(mgr);
 }
@@ -66,5 +70,43 @@ void handleSearch(EventManager *mgr) {
             break;
         default:
             return; // back to main menu
+    }
+}
+
+void handeAddEvent(EventManager *mgr) {
+    Event newEvent = createEventFromUserInput();
+
+    if (addEvent(mgr, newEvent)) {
+        printf("event added successfully!\n");
+    } else {
+        printf("failed to add event.\n");
+    }
+}
+
+void showMainMenu(EventManager *mgr) {
+    const char *options[] = {
+        "view calendar",
+        "add event",
+        "search events",
+        "exit"
+    };
+
+    int choice;
+    while (1) {
+        choice = arrowMenu("main menu", options, 4);
+        switch (choice) {
+            case 0:
+                handleViewCalendar(mgr);
+                break;
+            case 1: {
+                handeAddEvent(mgr);
+                break;
+            }
+            case 2:
+                handleSearch(mgr);
+                break;
+            default:
+                return; // exit
+        }
     }
 }

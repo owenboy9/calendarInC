@@ -3,6 +3,6 @@
 
 #include "event.h"
 
-void createEventFromUserInput(Event *e);
+Event createEventFromUserInput();
 
 #endif // ADD_H
