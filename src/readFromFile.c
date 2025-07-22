@@ -22,8 +22,6 @@ int readEventsFromFile(EventManager *mgr, const char *filename) {
         }
     }
 
-    initEventManager(mgr);
-
     Event temp;
     int count = 0;
 

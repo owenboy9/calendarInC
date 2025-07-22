@@ -7,7 +7,8 @@
 #include "../include/readFromFile.h"
 
 int main() {
-    EventManager mgr = {0};
+    EventManager mgr;
+    initEventManager(&mgr);
     readEventsFromFile(&mgr, "calendar.txt");
     showMainMenu(&mgr);
     writeAllEventsToFile(&mgr, "calendar.txt");
