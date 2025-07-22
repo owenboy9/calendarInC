@@ -6,7 +6,7 @@ Event createDefaultEvent() {
     Event e;
 
     time_t now = time(NULL);
-    struct tm *t = localtime(now);
+    struct tm *t = localtime(&now);
 
     memset(&e, 0, sizeof(Event));  // initialize all ints to 0, strings to ""
 

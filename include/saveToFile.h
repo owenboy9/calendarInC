@@ -4,6 +4,6 @@
 #include "event.h"
 #include "eventManager.h"
 
-void writeAllEventsToFile(const EventManager *mgr, const char *filename);
+int writeAllEventsToFile(const EventManager *mgr, const char *filename);
 
 #endif

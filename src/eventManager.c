@@ -19,8 +19,8 @@ void freeEventManager(EventManager *mgr) {
     mgr->capacity = 0;
 }
 
-// resize helper (private)
-static int ensureCapacity(EventManager *mgr, int minCapacity) {
+// ensure there is enough space for new events
+int ensureCapacity(EventManager *mgr, int minCapacity) {
     if (mgr->capacity >= minCapacity) return 1;
 
     int newCapacity = mgr->capacity == 0 ? 10 : mgr->capacity * 2;
@@ -41,7 +41,7 @@ static int ensureCapacity(EventManager *mgr, int minCapacity) {
 int addEvent(EventManager *mgr, Event newEvent) {
     if (!ensureCapacity(mgr, mgr->count + 1)) {
         fprintf(stderr, "failed to allocate memory for new event\n");
-        return;
+        return 0;
     }
     mgr->events[mgr->count++] = newEvent;
 

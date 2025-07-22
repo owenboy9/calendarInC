@@ -8,7 +8,9 @@
 #include "../include/add.h"
 #include "../include/edit.h"
 #include "../include/event.h"
+#include "../include/inpututils.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 const int MAX_EVENTS = 1000; // Maximum number of events to read
 
@@ -98,7 +100,7 @@ void showMainMenu(EventManager *mgr) {
                 handleViewCalendar(mgr);
                 break;
             case 1: {
-                handeAddEvent(mgr);
+                handleAddEvent(mgr);
                 break;
             }
             case 2:

@@ -5,6 +5,7 @@
 #include "../include/eventManager.h"
 
 int readEventsFromFile(EventManager *mgr, const char *filename) {
+    
     FILE *f = fopen(filename, "r");
     if (!f) {
         // file doesn't exist — create it

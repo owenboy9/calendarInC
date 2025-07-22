@@ -3,6 +3,7 @@
 #include <string.h>
 #include "../include/event.h"
 #include "../include/eventManager.h"
+#include "../include/inpututils.h"
 
 Event createEventFromUserInput() {
 
@@ -34,5 +35,7 @@ Event createEventFromUserInput() {
         promptInt("every... days / weeks, etc?", &e.recurrenceInterval, 0);
         promptInt("how many times?", &e.recurrenceCount, 0);
     }
+
+    return e;
     
 }

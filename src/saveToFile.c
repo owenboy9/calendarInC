@@ -15,7 +15,7 @@ void toLowerStr(char *dest, const char *src, size_t maxLen) {
 }
 
 // rewriting the whole file after editing or deleting something
-void writeAllEventsToFile(const EventManager *mgr, const char *filename) {
+int writeAllEventsToFile(const EventManager *mgr, const char *filename) {
     FILE *f = fopen(filename, "w");  // overwrite the whole thing
     if (!f) return 0;
 

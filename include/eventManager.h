@@ -12,6 +12,9 @@ typedef struct {
 // initialize event manager
 void initEventManager(EventManager *mgr);
 
+// ensure there is enough space for new events (private)
+int ensureCapacity(EventManager *mgr, int minCapacity);
+
 // free allocated memory in event manager
 void freeEventManager(EventManager *mgr);
 

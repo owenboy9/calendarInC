@@ -4,9 +4,6 @@
 #define NAME_SIZE 100
 #define CATEGORY_SIZE 100
 
-extern Event DEFAULT_EVENT;
-Event createDefaultEvent();
-
 typedef struct {
     char name[NAME_SIZE];
     char category[CATEGORY_SIZE];
@@ -20,5 +17,8 @@ typedef struct {
     int recurrenceCount; // Number of occurrences for recurring events
     int recurrenceInterval; // Interval for recurrence (e.g., every 2 weeks)
 } Event;
+
+extern Event DEFAULT_EVENT;
+Event createDefaultEvent();
 
 #endif
