@@ -1,22 +1,34 @@
-#include <time.h>
-#include <string.h>
 #include "../include/event.h"
+#include <string.h>
+#include <time.h>
 
 Event createDefaultEvent() {
     Event e;
 
+    // Clear strings
+    memset(e.name, 0, sizeof(e.name));
+    memset(e.category, 0, sizeof(e.category));
+
+    // Default: today
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
-
-    memset(&e, 0, sizeof(Event));  // initialize all ints to 0, strings to ""
-
     e.year = t->tm_year + 1900;
-    e.month = t->tm_mon +1;
+    e.month = t->tm_mon + 1;
     e.day = t->tm_mday;
-    e.startHour = t->tm_hour;
-    e.startMinute = t->tm_min;
-    e.endHour = (t->tm_hour + 1) % 24;
-    e.endMinute = t->tm_min;
+
+    // Clear time info
+    e.startHour = 0;
+    e.startMinute = 0;
+    e.endHour = 0;
+    e.endMinute = 0;
+    e.hasTime = 0;
+    e.hasEndTime = 0;
+
+    // No recurrence by default
+    e.isRecurring = 0;
+    e.recurrenceType = 0;
+    e.recurrenceCount = 0;
+    e.recurrenceInterval = 0;
 
     return e;
 }

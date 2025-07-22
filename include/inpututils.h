@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-void promptString(const char *label, char *field, size_t maxLen, int showCurrent);
+void promptString(const char *label, char *buffer, int size, int allowEmpty);
 
 void promptInt(const char *label, int *field, int showCurrent);
 

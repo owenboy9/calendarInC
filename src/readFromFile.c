@@ -26,20 +26,22 @@ int readEventsFromFile(EventManager *mgr, const char *filename) {
     Event temp;
     int count = 0;
 
-    while (fscanf(f, " %99[^|]|%99[^|]|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
-        temp.name, temp.category,
-        &temp.year, &temp.month, &temp.day,
-        &temp.startHour, &temp.startMinute,
-        &temp.endHour, &temp.endMinute,
-        &temp.hasTime, &temp.hasEndTime,
-        &temp.isRecurring, &temp.recurrenceCount, &temp.recurrenceInterval, &temp.recurrenceType) == 15) {
-            if (!ensureCapacity(mgr, count + 1)) {
-                fclose(f);
-                return count;
-            }
+    while (fscanf(f, " %99[^|]|%99[^|]|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d|%d\n",
+            temp.name, temp.category,
+            &temp.year, &temp.month, &temp.day,
+            &temp.startHour, &temp.startMinute,
+            &temp.endHour, &temp.endMinute,
+            &temp.hasTime, &temp.hasEndTime,
+            &temp.isRecurring,
+            &temp.recurrenceCount, &temp.recurrenceInterval, &temp.recurrenceType) == 15) {
+        if (!ensureCapacity(mgr, count + 1)) {
+            fclose(f);
+            return count;
+        }
 
         mgr->events[count++] = temp;
     }
+
 
     fclose(f);
 

@@ -2,18 +2,27 @@
 #include <string.h>
 #include <ctype.h>
 
-void promptString(const char *label, char *field, size_t maxLen, int showCurrent) {
-    char buf[100];
+void promptString(const char *label, char *buffer, int size, int allowEmpty) {
+    char temp[256];
 
-    if (showCurrent) printf("%s (currently '%s'): ", label, field);
-    else printf("%s: ", label);
-
-    if (fgets(buf, sizeof(buf), stdin)) {
-        if (buf[0] != '\n') {
-            buf[strcspn(buf, "\n")] = '\0';   // remove newline
-            strncpy(field, buf, maxLen);
-            field[maxLen - 1] = '\0';  // ensure null-terminationn
+    while (1) {
+        printf("%s: ", label);
+        if (!fgets(temp, sizeof(temp), stdin)) {
+            printf("error reading input.\n");
+            continue;
         }
+
+        // Remove newline
+        temp[strcspn(temp, "\n")] = 0;
+
+        if (!allowEmpty && strlen(temp) == 0) {
+            printf("input cannot be empty.\n");
+            continue;
+        }
+
+        strncpy(buffer, temp, size - 1);
+        buffer[size - 1] = '\0'; // ensure null-termination
+        break;
     }
 }
 

@@ -8,11 +8,13 @@
 
 // make sure all is lower case
 void toLowerStr(char *dest, const char *src, size_t maxLen) {
-    for (size_t i = 0; i < maxLen - 1 && src[i]; i++) {
+    size_t i;
+    for (i = 0; i < maxLen - 1 && src[i]; i++) {
         dest[i] = tolower((unsigned char)src[i]);
     }
-    dest[maxLen - 1] = '\0';  // ensure null-termination
+    dest[i] = '\0';  // terminate *right after* last character copied
 }
+
 
 // rewriting the whole file after editing or deleting something
 int writeAllEventsToFile(const EventManager *mgr, const char *filename) {
