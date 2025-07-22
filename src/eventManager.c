@@ -43,7 +43,6 @@ int addEvent(EventManager *mgr, Event newEvent) {
         fprintf(stderr, "failed to allocate memory for new event\n");
         return;
     }
-
     mgr->events[mgr->count++] = newEvent;
 
     return 1;

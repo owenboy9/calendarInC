@@ -10,14 +10,14 @@ int readEventsFromFile(EventManager *mgr, const char *filename) {
         // file doesn't exist — create it
         f = fopen(filename, "w");
         if (!f) {
-            perror("Failed to create events file");
+            perror("failed to create events file");
             return 0;
         }
         fclose(f);
         // now open again for reading (will be empty)
         f = fopen(filename, "r");
         if (!f) {
-            perror("Failed to reopen events file");
+            perror("failed to reopen events file");
             return 0;
         }
     }

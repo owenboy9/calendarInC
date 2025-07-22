@@ -73,9 +73,8 @@ void handleSearch(EventManager *mgr) {
     }
 }
 
-void handeAddEvent(EventManager *mgr) {
+void handleAddEvent(EventManager *mgr) {
     Event newEvent = createEventFromUserInput();
-
     if (addEvent(mgr, newEvent)) {
         printf("event added successfully!\n");
     } else {
